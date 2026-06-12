@@ -1,2 +1,1511 @@
-# School-website-Bright-Learners-international-
-Five pages school website 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bright Learners International</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0D1B2A;
+      --amber:  #E8A020;
+      --slate:  #4A6274;
+      --mist:   #E4ECF0;
+      --cream:  #F8F6F1;
+      --white:  #FFFFFF;
+      --text:   #1C2B38;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── PAGE VISIBILITY ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer; text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: var(--amber);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex; gap: 0; list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 0 20px;
+      height: 68px;
+      line-height: 68px;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      color: var(--white);
+      background: rgba(232,160,32,0.15);
+    }
+    .nav-links li a.active {
+      border-bottom: 3px solid var(--amber);
+    }
+    .nav-apply-btn {
+      background: var(--amber);
+      color: var(--navy) !important;
+      font-weight: 600 !important;
+      border-radius: 3px;
+      margin-left: 8px;
+    }
+    .nav-apply-btn:hover {
+      background: #f0b030 !important;
+      color: var(--navy) !important;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page-content { padding-top: 68px; }
+
+    /* ═══════════════════════════════════════
+       HOME PAGE
+    ═══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      background: var(--navy);
+      overflow: hidden;
+      min-height: 92vh;
+      display: flex; align-items: center;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(232,160,32,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,160,32,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-diagonal {
+      position: absolute;
+      top: -20%; right: -5%;
+      width: 55%; height: 140%;
+      background: linear-gradient(135deg, rgba(232,160,32,0.12) 0%, transparent 70%);
+      transform: skewX(-8deg);
+    }
+    .hero-amber-bar {
+      position: absolute;
+      top: 0; right: 28%;
+      width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--amber), transparent);
+      opacity: 0.6;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 80px 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 24px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 28px; height: 2px;
+      background: var(--amber);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      max-width: 440px;
+      margin-bottom: 44px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--navy);
+      padding: 14px 32px;
+      border: none; border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: #f0b030; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 13px 32px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-weight: 500;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
+
+    /* Hero right: stats card */
+    .hero-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 40px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--amber); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .hero-card-quote {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+
+    /* ── HOME: PILLARS ── */
+    .section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 96px 48px;
+    }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 2px; background: var(--amber);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--navy); margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1rem; line-height: 1.8;
+      color: var(--slate); max-width: 560px;
+    }
+    .pillars-header { margin-bottom: 56px; }
+    .pillars-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+    }
+    .pillar-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 40px 32px;
+      border: 1px solid rgba(13,27,42,0.08);
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+    .pillar-card:hover {
+      box-shadow: 0 12px 40px rgba(13,27,42,0.12);
+      transform: translateY(-4px);
+    }
+    .pillar-icon {
+      width: 52px; height: 52px;
+      background: var(--mist);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+    }
+    .pillar-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 12px;
+    }
+    .pillar-card p {
+      font-size: 0.9rem; line-height: 1.8; color: var(--slate);
+    }
+
+    /* ── HOME: NEWS STRIP ── */
+    .news-strip {
+      background: var(--navy);
+      padding: 80px 0;
+    }
+    .news-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 48px;
+    }
+    .news-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .news-header .section-title { color: var(--white); margin-bottom: 0; }
+    .news-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .news-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .news-card:hover { background: rgba(255,255,255,0.10); }
+    .news-thumb {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    .news-thumb.nt1 { background: linear-gradient(135deg, #1a3a5c, #2d5a8e); }
+    .news-thumb.nt2 { background: linear-gradient(135deg, #2a4a1e, #3d7a2e); }
+    .news-thumb.nt3 { background: linear-gradient(135deg, #4a2a1e, #8a4a2e); }
+    .news-body { padding: 24px; }
+    .news-tag {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 10px;
+    }
+    .news-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); line-height: 1.45; margin-bottom: 10px;
+    }
+    .news-date {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    }
+
+    /* ═══════════════════════════════════════
+       ABOUT PAGE
+    ═══════════════════════════════════════ */
+    .page-hero {
+      background: var(--navy);
+      padding: 80px 48px 72px;
+    }
+    .page-hero-inner { max-width: 1200px; margin: 0 auto; }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      font-weight: 900; color: var(--white);
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(255,255,255,0.6);
+      max-width: 560px; line-height: 1.8;
+    }
+    .breadcrumb {
+      display: flex; gap: 8px; align-items: center;
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .breadcrumb span { color: var(--amber); }
+
+    .about-mission {
+      background: var(--white);
+      border-bottom: 1px solid var(--mist);
+    }
+    .about-mission .section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .mission-visual {
+      position: relative;
+    }
+    .mission-img-box {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a5a 100%);
+      border-radius: 8px;
+      height: 380px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative; overflow: hidden;
+    }
+    .mission-img-box::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 6px; background: var(--amber);
+    }
+    .mission-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--amber);
+      color: var(--navy);
+      border-radius: 50%;
+      width: 100px; height: 100px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-weight: 700; text-align: center;
+      line-height: 1.2; font-size: 0.8rem;
+      box-shadow: 0 8px 24px rgba(232,160,32,0.4);
+    }
+    .mission-badge strong { font-size: 1.5rem; }
+
+    .values-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      margin-top: 48px;
+    }
+    .value-item {
+      padding: 20px;
+      background: var(--cream);
+      border-radius: 6px;
+      border-left: 3px solid var(--amber);
+    }
+    .value-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .value-item p { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+
+    .team-section { background: var(--cream); }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .team-card {
+      text-align: center;
+    }
+    .team-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      background: var(--mist);
+    }
+    .team-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 4px;
+    }
+    .team-card p { font-size: 0.82rem; color: var(--slate); }
+
+    /* ═══════════════════════════════════════
+       ACADEMICS PAGE
+    ═══════════════════════════════════════ */
+    .programs-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 28px;
+      margin-top: 56px;
+    }
+    .program-card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(13,27,42,0.08);
+      display: flex; flex-direction: column;
+    }
+    .program-header {
+      padding: 28px 32px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .program-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .pi-blue { background: #dde8f5; }
+    .pi-green { background: #ddf0e0; }
+    .pi-purple { background: #ede0f5; }
+    .pi-orange { background: #faebd7; }
+    .program-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--navy);
+    }
+    .program-body { padding: 0 32px 28px; flex: 1; }
+    .program-body p { font-size: 0.9rem; color: var(--slate); line-height: 1.8; margin-bottom: 16px; }
+    .program-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--mist);
+      color: var(--slate);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem; font-weight: 500;
+    }
+
+    .curriculum-table {
+      margin-top: 56px;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(13,27,42,0.08);
+    }
+    .ct-header {
+      background: var(--navy);
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 16px 28px;
+    }
+    .ct-header span {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .ct-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--mist);
+      transition: background 0.15s;
+    }
+    .ct-row:last-child { border-bottom: none; }
+    .ct-row:hover { background: var(--cream); }
+    .ct-row span { font-size: 0.88rem; color: var(--text); }
+    .ct-row span:first-child { font-weight: 600; color: var(--navy); }
+    .level-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.73rem; font-weight: 600;
+    }
+    .lb-all { background: #e0f0ff; color: #1a5fa0; }
+    .lb-mid { background: #e0f5e0; color: #1a7a2e; }
+    .lb-high { background: #f5e8e0; color: #9a4a1e; }
+
+    /* ═══════════════════════════════════════
+       ADMISSIONS PAGE
+    ═══════════════════════════════════════ */
+    .admission-hero-strip {
+      background: var(--amber);
+      padding: 24px 48px;
+    }
+    .ahs-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ahs-inner p {
+      font-size: 0.9rem; font-weight: 600; color: var(--navy);
+    }
+    .ahs-inner strong { font-size: 1rem; }
+
+    .process-steps {
+      margin-top: 56px;
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 14%; right: 14%;
+      height: 2px;
+      background: var(--mist);
+      z-index: 0;
+    }
+    .step {
+      text-align: center;
+      padding: 0 20px;
+      position: relative; z-index: 1;
+    }
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      margin: 0 auto 20px;
+      position: relative; z-index: 2;
+    }
+    .step.current .step-num { background: var(--amber); color: var(--navy); }
+    .step h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .step p { font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
+
+    .requirements-section { background: var(--white); }
+    .req-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      margin-top: 48px;
+    }
+    .req-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--amber);
+    }
+    .req-list { list-style: none; }
+    .req-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--mist);
+      font-size: 0.9rem; color: var(--slate); line-height: 1.6;
+    }
+    .req-list li::before {
+      content: '✓';
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .tuition-table {
+      margin-top: 56px;
+      background: var(--cream);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(13,27,42,0.1);
+    }
+    .tt-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(13,27,42,0.07);
+      align-items: center;
+    }
+    .tt-row:first-child {
+      background: var(--navy);
+    }
+    .tt-row:first-child span {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .tt-row:last-child { border-bottom: none; }
+    .tt-row span { font-size: 0.9rem; color: var(--text); }
+    .tt-row span:first-child { font-weight: 500; }
+    .tt-row .price { font-weight: 700; color: var(--navy); }
+    .tt-row.highlight { background: rgba(232,160,32,0.08); }
+    .tt-row.highlight span { color: var(--navy); }
+
+    /* ═══════════════════════════════════════
+       CONTACT PAGE
+    ═══════════════════════════════════════ */
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px;
+      align-items: start;
+    }
+    .contact-info-block { }
+    .contact-info-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    .contact-info-block p {
+      font-size: 0.95rem; color: var(--slate);
+      line-height: 1.8; margin-bottom: 40px;
+    }
+    .contact-details { list-style: none; }
+    .contact-details li {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--mist);
+    }
+    .contact-details li:last-child { border-bottom: none; }
+    .cd-icon {
+      width: 40px; height: 40px;
+      background: var(--mist);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cd-text strong {
+      display: block;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 3px;
+    }
+    .cd-text span { font-size: 0.9rem; color: var(--slate); }
+
+    /* Contact Form */
+    .contact-form-box {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 48px;
+      border: 1px solid rgba(13,27,42,0.08);
+      box-shadow: 0 8px 32px rgba(13,27,42,0.06);
+    }
+    .contact-form-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 32px;
+    }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(13,27,42,0.12);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--amber);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      padding: 15px 32px;
+      border: none; border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: #1a3a5c; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      margin-top: 56px;
+      background: var(--mist);
+      border-radius: 8px;
+      height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(13,27,42,0.08);
+      color: var(--slate);
+      font-size: 0.9rem;
+      flex-direction: column; gap: 12px;
+    }
+    .map-placeholder span { font-size: 2.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #07111C;
+      padding: 64px 48px 32px;
+      margin-top: 0;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand p {
+      font-size: 0.88rem; color: rgba(255,255,255,0.45);
+      line-height: 1.8; margin-top: 16px; max-width: 280px;
+    }
+    .footer-col h5 {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a {
+      font-size: 0.85rem; color: rgba(255,255,255,0.45);
+      text-decoration: none; transition: color 0.2s;
+      cursor: pointer;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.85); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    }
+    .footer-accred {
+      display: flex; gap: 12px; align-items: center;
+    }
+    .accred-badge {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 0.7rem; color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── DIVIDERS ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--mist), transparent);
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-inner,
+      .about-mission .section,
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .pillars-grid,
+      .news-grid,
+      .programs-grid,
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .section { padding: 60px 24px; }
+      .page-hero { padding: 60px 24px 48px; }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid,
+      .news-grid,
+      .programs-grid,
+      .team-grid,
+      .req-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark"></div>
+    <span class="nav-logo-text">Bright Learners International</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="showPage('academics')" id="nav-academics">Academics</a></li>
+    <li><a href="#" onclick="showPage('admissions')" id="nav-admissions">Admissions</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    <li><a href="#" onclick="showPage('admissions')" class="nav-apply-btn">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="page-content">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-diagonal"></div>
+      <div class="hero-amber-bar"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">Mount Barclay · Grades K–12</div>
+          <h1>Where <em>Curious Minds</em> Become Confident Leaders</h1>
+          <p class="hero-sub">Bright Learners International nurtures intellectual curiosity, moral courage, and the resilience to thrive in a complex world — from first steps to university and beyond.</p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="showPage('admissions')">Apply for 2025–26</button>
+            <button class="btn-ghost" onclick="showPage('about')">Our Story</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-title">Bright Learners at a Glance</div>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <div class="stat-num">1,240</div>
+              <div class="stat-label">Students enrolled</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">94%</div>
+              <div class="stat-label">University placement</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">1:14</div>
+              <div class="stat-label">Teacher–student ratio</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">48+</div>
+              <div class="stat-label">Extracurriculars</div>
+            </div>
+          </div>
+          <div class="hero-card-quote">"The measure of a Bright Learners education is not a grade, but a life well-lived." — Mr. Timothy S. Verdier Jr., Founder</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pillars -->
+    <div class="section">
+      <div class="pillars-header">
+        <div class="section-eyebrow">Our Approach</div>
+        <h2 class="section-title">Three Pillars of a Bright Learners Education</h2>
+        <p class="section-sub">Our pedagogy is grounded in the belief that excellence, character, and community are inseparable.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">📚</div>
+          <h3>Academic Rigour</h3>
+          <p>Challenging, inquiry-based programmes from primary through senior school, culminating in IB and A-Level pathways that open doors to the world's leading universities.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🌱</div>
+          <h3>Character & Wellbeing</h3>
+          <p>A structured pastoral programme, mindfulness integration, and peer mentorship that equip students with emotional intelligence alongside academic capability.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🌍</div>
+          <h3>Global Citizenship</h3>
+          <p>Exchange partnerships with 22 schools across four continents, MUN, and a service-learning programme that develops empathy and international perspective.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- News -->
+    <div class="news-strip">
+      <div class="news-inner">
+        <div class="news-header">
+          <div>
+            <div class="section-eyebrow" style="color:var(--amber)">Latest News</div>
+            <h2 class="section-title" style="color:var(--white)">From the Campus</h2>
+          </div>
+          <button class="btn-ghost" style="white-space:nowrap">View all news</button>
+        </div>
+        <div class="news-grid">
+          <div class="news-card">
+            <div class="news-thumb nt1">🏆</div>
+            <div class="news-body">
+              <div class="news-tag">Achievement</div>
+              <h4>Westbrook Students Sweep Regional Science Olympiad</h4>
+              <div class="news-date">May 28, 2025</div>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-thumb nt2">🎭</div>
+            <div class="news-body">
+              <div class="news-tag">Arts</div>
+              <h4>Spring Musical "Into the Woods" Receives Standing Ovation</h4>
+              <div class="news-date">May 14, 2025</div>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-thumb nt3">🎓</div>
+            <div class="news-body">
+              <div class="news-tag">Admissions</div>
+              <h4>Applications Now Open for the 2025–26 Academic Year</h4>
+              <div class="news-date">May 1, 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Footer for home -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo" style="pointer-events:none;">
+            <div class="nav-logo-mark"></div>
+            <span class="nav-logo-text">Bright Learners International</span>
+          </div>
+          <p>Shaping curious, compassionate, and courageous young people in Mount Barclay. Founded by Mr. Timothy S. Verdier Jr. and accredited by leading international bodies.</p>
+        </div>
+        <div class="footer-col">
+          <h5>School</h5>
+          <ul>
+            <li><a onclick="showPage('about')">About Us</a></li>
+            <li><a onclick="showPage('academics')">Academics</a></li>
+            <li><a>Campus Life</a></li>
+            <li><a>Alumni</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Admissions</h5>
+          <ul>
+            <li><a onclick="showPage('admissions')">Apply Now</a></li>
+            <li><a>Open Days</a></li>
+            <li><a>Tuition & Aid</a></li>
+            <li><a>FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a onclick="showPage('contact')">Contact Us</a></li>
+            <li><a>Parent Portal</a></li>
+            <li><a>Staff Directory</a></li>
+            <li><a>Emergency Info</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Bright Learners International. All rights reserved.</p>
+        <div class="footer-accred">
+          <div class="accred-badge">NEASC Accredited</div>
+          <div class="accred-badge">IB World School</div>
+          <div class="accred-badge">CIS Member</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="page-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="breadcrumb">Home <span>›</span> About</div>
+        <h1>Our Story, Our Purpose</h1>
+        <p>Founded by Mr. Timothy S. Verdier Jr., Bright Learners International has been developing whole people — intellectually, morally, and creatively — for a world that demands all three.</p>
+      </div>
+    </div>
+
+    <div class="about-mission">
+      <div class="section">
+        <div class="mission-visual">
+          <div class="mission-img-box">🏛️
+            <div class="mission-badge"><strong>BLI</strong>Mount<br>Barclay</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-eyebrow">Mission & Values</div>
+          <h2 class="section-title">We believe education should be transformative, not transactional.</h2>
+          <p class="section-sub">Our mission is to inspire every student to pursue knowledge with rigour and joy, to act with integrity, and to contribute meaningfully to a diverse and interconnected world.</p>
+          <div class="values-grid">
+            <div class="value-item">
+              <h4>Intellectual Curiosity</h4>
+              <p>We ask big questions and sit comfortably with uncertainty.</p>
+            </div>
+            <div class="value-item">
+              <h4>Integrity First</h4>
+              <p>We do what is right, even when it is difficult.</p>
+            </div>
+            <div class="value-item">
+              <h4>Inclusive Community</h4>
+              <p>Every student, family, and idea belongs at Westbrook.</p>
+            </div>
+            <div class="value-item">
+              <h4>Courageous Growth</h4>
+              <p>We embrace challenge as the engine of real learning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <div class="section">
+        <div class="section-eyebrow">Leadership</div>
+        <h2 class="section-title">The People Behind Westbrook</h2>
+        <p class="section-sub">Our senior team brings decades of educational leadership, research, and international experience to serve our community.</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">👨‍💼</div>
+            <h4>Mr. Timothy S. Verdier Jr.</h4>
+            <p>Founder & Head of School</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">👨‍🎓</div>
+            <h4>Mr. James Whitfield</h4>
+            <p>Deputy Head — Academics</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">👩‍🏫</div>
+            <h4>Ms. Priya Nair</h4>
+            <p>Director of Pastoral Care</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">👨‍💼</div>
+            <h4>Mr. Thomas Berg</h4>
+            <p>Head of Admissions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px">
+        <p>© 2025 Bright Learners International. All rights reserved.</p>
+        <div class="footer-accred">
+          <div class="accred-badge">NEASC Accredited</div>
+          <div class="accred-badge">IB World School</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ACADEMICS PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-academics">
+  <div class="page-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="breadcrumb">Home <span>›</span> Academics</div>
+        <h1>A Curriculum Built for Tomorrow</h1>
+        <p>From phonics in Primary to extended essays in the IB Diploma, every stage of learning at Westbrook is designed with intentionality and depth.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Programmes</div>
+      <h2 class="section-title">Learning Pathways at Every Stage</h2>
+      <p class="section-sub">Four connected divisions, one coherent philosophy: know deeply, think critically, communicate clearly.</p>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-icon pi-blue">🎨</div>
+            <h3>Primary School (K–5)</h3>
+          </div>
+          <div class="program-body">
+            <p>Our inquiry-based primary curriculum uses the IB PYP framework to build foundational literacy, numeracy, and a love of discovery through hands-on learning and thematic units.</p>
+            <div class="program-tags">
+              <span class="tag">IB PYP</span>
+              <span class="tag">Literacy</span>
+              <span class="tag">STEM Foundations</span>
+              <span class="tag">Arts Integration</span>
+            </div>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-icon pi-green">🔬</div>
+            <h3>Middle School (Grades 6–8)</h3>
+          </div>
+          <div class="program-body">
+            <p>The IB MYP at Westbrook develops conceptual understanding across disciplines, with a focus on interdisciplinary thinking, community service, and the personal project in Grade 8.</p>
+            <div class="program-tags">
+              <span class="tag">IB MYP</span>
+              <span class="tag">Project-Based</span>
+              <span class="tag">Languages</span>
+              <span class="tag">Design Tech</span>
+            </div>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-icon pi-purple">📐</div>
+            <h3>Senior School (Grades 9–10)</h3>
+          </div>
+          <div class="program-body">
+            <p>A broad and balanced pre-diploma programme providing students with a rigorous academic base while allowing specialisation to emerge. Students complete iGCSE and Westbrook Diplomas.</p>
+            <div class="program-tags">
+              <span class="tag">iGCSE</span>
+              <span class="tag">Extended Learning</span>
+              <span class="tag">Research Skills</span>
+            </div>
+          </div>
+        </div>
+        <div class="program-card">
+          <div class="program-header">
+            <div class="program-icon pi-orange">🎓</div>
+            <h3>Diploma (Grades 11–12)</h3>
+          </div>
+          <div class="program-body">
+            <p>Students choose between the International Baccalaureate Diploma and our Advanced A-Level track. Both pathways include Theory of Knowledge, the Extended Essay, and CAS activities.</p>
+            <div class="program-tags">
+              <span class="tag">IB Diploma</span>
+              <span class="tag">A-Levels</span>
+              <span class="tag">University Prep</span>
+              <span class="tag">CAS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curriculum-table">
+        <div class="ct-header">
+          <span>Subject</span>
+          <span>Department</span>
+          <span>Level</span>
+          <span>Weekly Hours</span>
+        </div>
+        <div class="ct-row">
+          <span>Mathematics & Further Maths</span>
+          <span>Mathematics</span>
+          <span><span class="level-badge lb-all">All Levels</span></span>
+          <span>5 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>Sciences (Bio, Chem, Physics)</span>
+          <span>Science</span>
+          <span><span class="level-badge lb-mid">Grades 6–12</span></span>
+          <span>4–6 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>English Literature & Language</span>
+          <span>Humanities</span>
+          <span><span class="level-badge lb-all">All Levels</span></span>
+          <span>5 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>World History & Geography</span>
+          <span>Humanities</span>
+          <span><span class="level-badge lb-mid">Grades 6–12</span></span>
+          <span>3 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>Modern Languages (FR/ES/ZH)</span>
+          <span>Languages</span>
+          <span><span class="level-badge lb-all">All Levels</span></span>
+          <span>4 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>Visual Arts & Music</span>
+          <span>Arts</span>
+          <span><span class="level-badge lb-all">All Levels</span></span>
+          <span>2–3 hrs</span>
+        </div>
+        <div class="ct-row">
+          <span>Computer Science & Design</span>
+          <span>Technology</span>
+          <span><span class="level-badge lb-high">Grades 9–12</span></span>
+          <span>3–4 hrs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px">
+        <p>© 2025 Bright Learners International. All rights reserved.</p>
+        <div class="footer-accred">
+          <div class="accred-badge">IB World School</div>
+          <div class="accred-badge">Cambridge IGCSE Centre</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADMISSIONS PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-admissions">
+  <div class="page-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="breadcrumb">Home <span>›</span> Admissions</div>
+        <h1>Join the Westbrook Community</h1>
+        <p>We welcome families who share our commitment to joyful, purposeful learning. Applications for the 2025–26 academic year are now open.</p>
+      </div>
+    </div>
+
+    <div class="admission-hero-strip">
+      <div class="ahs-inner">
+        <p>🗓 <strong>Application deadline for September 2025 entry: January 31, 2025.</strong> Open Day — Saturday, November 16 at 10:00 AM.</p>
+        <button class="btn-primary" onclick="showPage('contact')">Book a Visit</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">How to Apply</div>
+      <h2 class="section-title">A Straightforward Four-Step Process</h2>
+      <p class="section-sub">We've designed our admissions process to be clear and respectful of your family's time.</p>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Enquire & Visit</h4>
+          <p>Attend an Open Day or arrange a private campus tour with our admissions team.</p>
+        </div>
+        <div class="step current">
+          <div class="step-num">2</div>
+          <h4>Submit Application</h4>
+          <p>Complete the online form with school records, references, and a personal statement.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Assessment Day</h4>
+          <p>Students attend a half-day visit for grade-appropriate assessments and an informal interview.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Offer & Enrol</h4>
+          <p>Successful applicants receive a conditional offer letter within two weeks of Assessment Day.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="requirements-section">
+      <div class="section">
+        <div class="section-eyebrow">Requirements</div>
+        <h2 class="section-title">What We Ask of Applicants</h2>
+        <div class="req-grid">
+          <div class="req-block">
+            <h3>Primary School (K–5)</h3>
+            <ul class="req-list">
+              <li>Completed online application form</li>
+              <li>Copy of birth certificate</li>
+              <li>Most recent school report (if applicable)</li>
+              <li>Teacher reference (Grades 2–5 only)</li>
+              <li>Immunisation records</li>
+              <li>Informal readiness assessment on Assessment Day</li>
+            </ul>
+          </div>
+          <div class="req-block">
+            <h3>Middle & Senior School (6–12)</h3>
+            <ul class="req-list">
+              <li>Completed online application form</li>
+              <li>Last two years of school transcripts</li>
+              <li>Two academic references from current school</li>
+              <li>Personal statement (300–500 words)</li>
+              <li>Standardised test scores (if available)</li>
+              <li>Written and mathematical assessments on Assessment Day</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tuition-table">
+          <div class="tt-row">
+            <span>Programme</span>
+            <span>Annual Tuition</span>
+            <span>Registration Fee</span>
+          </div>
+          <div class="tt-row">
+            <span>Kindergarten</span>
+            <span class="price">$18,400</span>
+            <span>$500</span>
+          </div>
+          <div class="tt-row">
+            <span>Primary (Grades 1–5)</span>
+            <span class="price">$22,600</span>
+            <span>$500</span>
+          </div>
+          <div class="tt-row highlight">
+            <span>Middle School (Grades 6–8)</span>
+            <span class="price">$27,800</span>
+            <span>$600</span>
+          </div>
+          <div class="tt-row">
+            <span>Senior School (Grades 9–10)</span>
+            <span class="price">$31,200</span>
+            <span>$600</span>
+          </div>
+          <div class="tt-row">
+            <span>Diploma (Grades 11–12)</span>
+            <span class="price">$34,500</span>
+            <span>$700</span>
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:0.82rem;color:var(--slate)">Need-based financial aid covers up to 40% of tuition for qualifying families. Contact admissions for details.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px">
+        <p>© 2025 Bright Learners International. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="page-content">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="breadcrumb">Home <span>›</span> Contact</div>
+        <h1>We'd Love to Hear from You</h1>
+        <p>Whether you're a prospective family, a current parent, or a member of the press — our team is ready to help.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="contact-layout">
+        <div class="contact-info-block">
+          <div class="section-eyebrow">Get in Touch</div>
+          <h2>Contact Information</h2>
+          <p>Our main reception is open Monday to Friday, 7:30 AM – 5:30 PM. Specific departments may have different hours.</p>
+          <ul class="contact-details">
+            <li>
+              <div class="cd-icon">📍</div>
+              <div class="cd-text">
+                <strong>Address</strong>
+                <span>Mount Barclay, Margibi County, Liberia</span>
+              </div>
+            </li>
+            <li>
+              <div class="cd-icon">📞</div>
+              <div class="cd-text">
+                <strong>Main Reception</strong>
+                <span>0774845678 / 0889765400</span>
+              </div>
+            </li>
+            <li>
+              <div class="cd-icon">✉️</div>
+              <div class="cd-text">
+                <strong>General Enquiries</strong>
+                <span>info@brightlearnersinternational.edu</span>
+              </div>
+            </li>
+            <li>
+              <div class="cd-icon">🎓</div>
+              <div class="cd-text">
+                <strong>Admissions Office</strong>
+                <span>admissions@brightlearnersinternational.edu</span>
+              </div>
+            </li>
+            <li>
+              <div class="cd-icon">🆘</div>
+              <div class="cd-text">
+                <strong>After-Hours Emergency</strong>
+                <span>0774845678</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-form-box">
+          <h3>Send Us a Message</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input type="tel" placeholder="+1 (617) 555-0000" />
+          </div>
+          <div class="form-group">
+            <label>I am a...</label>
+            <select>
+              <option>Prospective Family</option>
+              <option>Current Parent</option>
+              <option>Current Student</option>
+              <option>Alumni</option>
+              <option>Press / Media</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="How can we help?" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us more about your enquiry..."></textarea>
+          </div>
+          <button class="form-submit" onclick="handleSubmit(this)">Send Message</button>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        <span>🗺️</span>
+        <strong>Bright Learners International, Mount Barclay, Liberia</strong>
+        <p style="font-size:0.8rem;color:var(--slate)">Interactive map would be embedded here via Google Maps API</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px">
+        <p>© 2025 Bright Learners International. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ JAVASCRIPT ══ -->
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    const navLink = document.getElementById('nav-' + id);
+    if (navLink) navLink.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#2a7a2e';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }
+</script>
+</body>
+</html>
